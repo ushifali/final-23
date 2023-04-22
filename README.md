@@ -1,6 +1,22 @@
-# Final-23
+# Smart Tourist Guide
 
-# TO-DO
+
+## Setup
+### Initial setup
+
+```
+python app.py setup
+```
+### To run server
+```
+python app.py run
+```
+
+### To drop all database
+```
+python app.py drop-all
+```
+
 
 [ ] Refresh the weather API token.<br>
 [ ] Get templates for front-end (Also we using Flask).<br>
