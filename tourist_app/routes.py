@@ -3,6 +3,7 @@ from flask_login import logout_user, login_user, current_user, login_required
 
 from tourist_app import app, db, bcrypt
 from tourist_app.domain.user import User
+from tourist_app.domain.restaurant import Restaurant
 from tourist_app.forms import LoginForm, RegistrationForm
 from tourist_app.processor.Restaurant import find_restaurants
 
@@ -61,7 +62,10 @@ def listing():
         form_data = [
             category, address, price
         ]
-        return render_template('listing.html', data = form_data)
+
+        restaurants = db.session.execute(db.select(Restaurant).filter_by(pricing_for_2=8000))
+
+        return render_template('listing.html', data = form_data, restaurants = restaurants)
     return render_template('listing.html')
 
 
