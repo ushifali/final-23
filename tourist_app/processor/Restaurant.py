@@ -4,6 +4,7 @@ from tourist_app.Contract.user_preferences import ContractUserPreferences
 from tourist_app.domain.restaurant import Restaurant
 from math import radians, cos, sin, asin, sqrt
 
+from tourist_app.domain.user import User
 from tourist_app.domain.user_preferences import UserPreferences
 
 
