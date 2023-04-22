@@ -2,6 +2,10 @@
 
 
 ## Setup
+### Download all packages
+```
+pip install -r requirements.txt
+```
 ### Initial setup
 
 ```

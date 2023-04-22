@@ -6,38 +6,15 @@ from tourist_app.domain.restaurant import Restaurant
 from tourist_app.domain.user_preferences import UserPreferences
 
 
-def main():
-    args = sys.argv[1:]
-    if len(args) == 0:
-        print("Nothing to run")
-    arg = args[0]
-
-    if arg == "run":
-        app.run()
-    elif arg == "setup":
-        create_db_tables()
-        load_restaurant_data()
-        load_user_preference_data()
-    elif arg == "drop-all":
-        drop_all_tables()
-    else:
-        print("unknown command")
+def prepare_listing_user_pref(row):
+    return UserPreferences(**row)
 
 
-if __name__ == "__main__":
-    main()
-
-
-def create_db_tables():
-    with app.app_context():
-        db.create_all()
-
-
-def load_restaurant_data():
-    with open('fullRestaurants.csv', encoding="utf-8", newline='') as csv_file:
+def load_user_preference_data():
+    with open('user_prefereces.csv', newline='') as csv_file:
         csvreader = csv.DictReader(csv_file, quotechar='"')
 
-        listings = [prepare_listing(row) for row in csvreader]
+        listings = [prepare_listing_user_pref(row) for row in csvreader]
 
         with app.app_context():
             db.session.add_all(listings)
@@ -65,19 +42,20 @@ def prepare_listing(row):
     return restaurant
 
 
-def load_user_preference_data():
-    with open('user_prefereces.csv', newline='') as csv_file:
+def load_restaurant_data():
+    with open('fullRestaurants.csv', encoding="utf-8", newline='') as csv_file:
         csvreader = csv.DictReader(csv_file, quotechar='"')
 
-        listings = [prepare_listing_user_pref(row) for row in csvreader]
+        listings = [prepare_listing(row) for row in csvreader]
 
         with app.app_context():
             db.session.add_all(listings)
             db.session.commit()
 
 
-def prepare_listing_user_pref(row):
-    return UserPreferences(**row)
+def create_db_tables():
+    with app.app_context():
+        db.create_all()
 
 
 def drop_all_tables():
@@ -85,9 +63,31 @@ def drop_all_tables():
         db.drop_all()
         db.session.commit()
 
-# if __name__=='__main__':
-#     with app.app_context():
-#         i=Restaurant.__table__.drop(db.engine)
-#         print(i)
-#         db.session.commit()
 
+if __name__ == '__main__':
+    with app.app_context():
+        i = Restaurant.__table__.drop(db.engine)
+        print(i)
+        db.session.commit()
+
+
+def main():
+    args = sys.argv[1:]
+    if len(args) == 0:
+        print("Nothing to run")
+    arg = args[0]
+
+    if arg == "run":
+        app.run()
+    elif arg == "setup":
+        create_db_tables()
+        # load_restaurant_data()
+        # load_user_preference_data()
+    elif arg == "drop-all":
+        drop_all_tables()
+    else:
+        print("unknown command")
+
+
+if __name__ == "__main__":
+    main()
