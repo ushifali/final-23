@@ -4,6 +4,8 @@ from flask_login import logout_user, login_user, current_user, login_required
 from tourist_app import app, db, bcrypt
 from tourist_app.domain.user import User
 from tourist_app.domain.restaurant import Restaurant
+from tourist_app.domain.attraction import Attraction
+from tourist_app.domain.hotel import Hotel
 from tourist_app.forms import LoginForm, RegistrationForm
 from tourist_app.processor.Restaurant import find_restaurants
 
@@ -35,8 +37,14 @@ def index():
 
 
 @app.route("/category")
+@login_required
 def category():
-    return render_template('category.html')
+
+    restaurants = db.session.execute(db.select(Restaurant).filter_by(dining_rating=4.9))
+    hotels = db.session.execute(db.select(Hotel).filter_by(city='Bangalore', rating=5.0))
+    attractions = db.session.execute(db.select(Attraction).filter_by(city='Bengaluru', totalScore=5.0))
+
+    return render_template('category.html', restaurants=restaurants, hotels=hotels, attractions=attractions)
 
 @app.route('/get_location', methods=['POST'])
 def get_location():
@@ -48,6 +56,7 @@ def get_location():
     return jsonify(success=True)
 
 @app.route("/listing", methods=['GET', 'POST'])
+@login_required
 def listing():
     if request.method == "POST":
         category = request.form.get('category')
