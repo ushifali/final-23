@@ -73,8 +73,8 @@ def main():
         app.run()
     elif arg == "setup":
         create_db_tables()
-        # load_restaurant_data()
-        # load_user_preference_data()
+        load_restaurant_data()
+        load_user_preference_data()
     elif arg == "drop-all":
         drop_all_tables()
     else:

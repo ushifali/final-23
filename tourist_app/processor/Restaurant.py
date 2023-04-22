@@ -25,8 +25,6 @@ def find_restaurants(latitude, longitude, user_id):
                                                                  max_distance=user_preference.max_distance,
                                                                  facilities=facilities
                                                                  ))
-    print("bbbbbbb")
-    print(len(contract_user_preferences))
 
     all_restaurants = Restaurant.query.all()
     recommendations = get_recommendations(all_restaurants, latitude, longitude)
@@ -98,10 +96,10 @@ def cosine_similarity(cuisine_list1, cuisine_list2):
 def recommend_restaurants(user_preferences, restaurant_list):
     recommended_restaurants = []
     for restaurant in restaurant_list:
-        print("Restaurant Name")
-        print(restaurant.restaurant_name)
-        print(user_preferences.cuisines)
-        print(restaurant.cuisines)
+        # print("Restaurant Name")
+        # print(restaurant.restaurant_name)
+        # print(user_preferences.cuisines)
+        # print(restaurant.cuisines)
         cosine_sim = cosine_similarity(user_preferences.cuisines, restaurant.cuisines)
         if cosine_sim > 0:
             recommended_restaurants.append(restaurant)
