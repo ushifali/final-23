@@ -1,4 +1,4 @@
-from flask import redirect, url_for, render_template, flash, request
+from flask import redirect, url_for, render_template, flash, request, session, jsonify
 from flask_login import logout_user, login_user, current_user, login_required
 
 from tourist_app import app, db, bcrypt
@@ -26,19 +26,6 @@ def restaurants_list(latitude, longitude, user_id):
 @app.route("/index", methods=['GET', 'POST'])
 @login_required
 def index():
-    # category = request.form['category']
-    # address = request.form['address']
-    # price = request.form['price']
-
-    # latitude = request.json['latitude']
-    # longitude = request.json['longitude']
-
-    # form_data = [
-    #     category, address, price, latitude, longitude
-    # ]
-    # session['form_data'] = form_data
-    # if request.method == "POST":
-    #     return redirect(url_for('listing'))
 
     return render_template('index.html',
                            cat=[{'cat': 'Attractions'}, {'cat': 'Restaurants'}, {'cat': 'Hotels'}],
@@ -50,21 +37,33 @@ def index():
 def category():
     return render_template('category.html')
 
+@app.route('/get_location', methods=['POST'])
+def get_location():
+    latitude = request.json['latitude']
+    longitude = request.json['longitude']
+
+    session['latitude'] = latitude
+    session['longitude'] = longitude
+    return jsonify(success=True)
 
 @app.route("/listing", methods=['GET', 'POST'])
 def listing():
-    # form_data = session['form_data']
     if request.method == "POST":
         category = request.form.get('category')
         address = request.form.get('address')
         price = request.form.get('price')
+        
+        latitude = session.get('latitude')
+        longitude = session.get('longitude')
 
+        print(latitude, longitude)
+        
         form_data = [
             category, address, price
         ]
-
         return render_template('listing.html', data = form_data)
     return render_template('listing.html')
+
 
 
 @app.route("/contact")

@@ -668,7 +668,7 @@ https://templatemo.com/tm-564-plot-listing
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/index');
+        xhr.open('POST', '/get_location');
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify({latitude: latitude, longitude: longitude}));
       });
