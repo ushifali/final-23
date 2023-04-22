@@ -13,7 +13,7 @@ class Restaurant(db.Model):
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
     timings = db.Column(db.String(50))
-    # highlights = db.Column(ARRAY(db.String), nullable=True)
+    highlights = db.Column(db.String(500))
     votes = db.Column(db.Float)
     delivery = db.Column(db.Float)
     takeaway = db.Column(db.Float)

@@ -25,6 +25,8 @@ def find_restaurants(latitude, longitude, user_id):
                                                                  max_distance=user_preference.max_distance,
                                                                  facilities=facilities
                                                                  ))
+    print("bbbbbbb")
+    print(len(contract_user_preferences))
 
     all_restaurants = Restaurant.query.all()
     recommendations = get_recommendations(all_restaurants, latitude, longitude)
@@ -67,7 +69,7 @@ def haversine_distance(lat1, lon1, lat2, lon2):
 
 
 def get_recommendations(restaurants, user_latitude, user_longitude, max_distance=2000, max_price=1200,
-                        min_dining_rating=3.5, n_recommendations=10):
+                        min_dining_rating=3.5, n_recommendations=100):
     # Calculate distance from user's location to each restaurant
     distances = []
     for restaurant in restaurants:
