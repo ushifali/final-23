@@ -14,14 +14,14 @@
     <title>Plotlist - Listing HTML5 Template</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-plot-listing.css">
-    <link rel="stylesheet" href="assets/css/animated.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/templatemo-plot-listing.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/animated.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/owl.css') }}">
 <!--
 
 TemplateMo 564 Plot Listing
@@ -53,17 +53,22 @@ https://templatemo.com/tm-564-plot-listing
         <div class="col-12">
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
-            <a href="index.html" class="logo">Pack UP!
+            <a href="/index" class="logo">TOURGUIDE
             </a>
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="category.html">Category</a></li>
-              <li><a href="listing.html">About Us</a></li>
-              <li><a href="contact.html" class="active">Contact Us</a></li> 
+              <li><a href="/index" class="active">Home</a></li>
+              <li><a href="/category">Category</a></li>
+              <li><a href="/contact">Contact Us</a></li> 
+              {% if current_user.is_authenticated %}
+               <li> <a href="{{ url_for('logout') }}">Logout</a></li>
+              {% else %}
+            <li> <a href="{{ url_for('login') }}">Login</a> </li>
+            <li> <a href="{{ url_for('register') }}">Register</a> </li>
+              {% endif %}
               <!-- <li><div class="main-white-button"><a href="#"><i class="fa fa-plus"></i> Add Your Listing</a></div></li>  -->
-            </ul>        
+            </ul>          
             <a class='menu-trigger'>
                 <span>Menu</span>
             </a>
@@ -207,12 +212,12 @@ https://templatemo.com/tm-564-plot-listing
 
 
   <!-- Scripts -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/animation.js"></script>
-  <script src="assets/js/imagesloaded.js"></script>
-  <script src="assets/js/custom.js"></script>
+  <script src="{{ url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='assets/js/owl-carousel.js') }}"></script>
+  <script src="{{ url_for('static',filename='assets/js/animation.js') }}"></script>
+  <script src="{{ url_for('static',filename='assets/js/imagesloaded.js') }}"></script>
+  <script src="{{ url_for('static',filename='assets/js/custom.js') }}"></script>
 
 </body>
 
