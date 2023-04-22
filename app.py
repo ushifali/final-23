@@ -63,14 +63,6 @@ def drop_all_tables():
         db.drop_all()
         db.session.commit()
 
-
-if __name__ == '__main__':
-    with app.app_context():
-        i = Restaurant.__table__.drop(db.engine)
-        print(i)
-        db.session.commit()
-
-
 def main():
     args = sys.argv[1:]
     if len(args) == 0:
