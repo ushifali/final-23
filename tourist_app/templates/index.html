@@ -97,7 +97,7 @@ https://templatemo.com/tm-564-plot-listing
               {% endfor %}
             {% endif %}
           {% endfor %} -->
-          <form id="search-form" name="gs" method="post" role="search" action="">
+          <form id="search-form" name="gs" method="POST" role="search" action="{{ url_for('listing') }}">
             <div class="row">
               <div class="col-lg-3 align-self-center">
                   <fieldset>
@@ -130,7 +130,7 @@ https://templatemo.com/tm-564-plot-listing
               </div>
               <div class="col-lg-3">                        
                   <fieldset>
-                      <button class="main-button"><i class="fa fa-search"></i> Search Now</button>
+                      <button class="main-button" type="submit"><i class="fa fa-search"></i> Search Now</button>
                   </fieldset>
               </div>
             </div>

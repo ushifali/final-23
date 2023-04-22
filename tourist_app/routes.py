@@ -23,16 +23,22 @@ def restaurants_list(latitude, longitude, user_id):
     return response
 
 
-@app.route("/index", methods=['get', 'post'])
+@app.route("/index", methods=['GET', 'POST'])
 @login_required
 def index():
-    if request.method == "post":
-        category = request.form['category']
-        address = request.form['address']
-        price = request.form['price']
+    # category = request.form['category']
+    # address = request.form['address']
+    # price = request.form['price']
 
-        latitude = request.json['latitude']
-        longitude = request.json['longitude']
+    # latitude = request.json['latitude']
+    # longitude = request.json['longitude']
+
+    # form_data = [
+    #     category, address, price, latitude, longitude
+    # ]
+    # session['form_data'] = form_data
+    # if request.method == "POST":
+    #     return redirect(url_for('listing'))
 
     return render_template('index.html',
                            cat=[{'cat': 'Attractions'}, {'cat': 'Restaurants'}, {'cat': 'Hotels'}],
@@ -45,8 +51,19 @@ def category():
     return render_template('category.html')
 
 
-@app.route("/listing")
+@app.route("/listing", methods=['GET', 'POST'])
 def listing():
+    # form_data = session['form_data']
+    if request.method == "POST":
+        category = request.form.get('category')
+        address = request.form.get('address')
+        price = request.form.get('price')
+
+        form_data = [
+            category, address, price
+        ]
+
+        return render_template('listing.html', data = form_data)
     return render_template('listing.html')
 
 

@@ -14,14 +14,14 @@
     <title>Plotlist - Listing HTML5 Template</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-plot-listing.css">
-    <link rel="stylesheet" href="assets/css/animated.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/templatemo-plot-listing.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/animated.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/owl.css') }}">
 <!--
 
 TemplateMo 564 Plot Listing
@@ -53,15 +53,15 @@ https://templatemo.com/tm-564-plot-listing
         <div class="col-12">
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
-            <a href="index.html" class="logo">Pack UP!
+            <a href="/index" class="logo">Pack UP!
             </a>
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="category.html">Category</a></li>
-              <li><a href="listing.html" class="active">About Us</a></li>
-              <li><a href="contact.html">Contact Us</a></li> 
+              <li><a href="/index">Home</a></li>
+              <li><a href="/category">Category</a></li>
+              <li><a href="/listing" class="active">About Us</a></li>
+              <li><a href="/contact">Contact Us</a></li> 
               <!-- <li><div class="main-white-button"><a href="#"><i class="fa fa-plus"></i> Add Your Listing</a></div></li>  -->
             </ul>        
             <a class='menu-trigger'>
@@ -81,15 +81,20 @@ https://templatemo.com/tm-564-plot-listing
         <div class="col-lg-8">
           <div class="top-text header-text">
             <h6>Categories with Simple Tabs</h6>
-            <h2>Additional Information</h2>
+            <h2>Additional Information </h2>
+            {% for item in data %}
+              <li> {{item}} </li>
+            {% endfor %}
+              <!-- {{ data['category'] }}
+              {{ data['address'] }} 
+              {{ data['price'] }} </h2> -->
+            
           </div>
         </div>
       </div>
     </div>
   </div>
-
-
-
+  
   <div class="category-post">
     <div class="container">
       <div class="row">
@@ -101,12 +106,12 @@ https://templatemo.com/tm-564-plot-listing
                   <div class="menu">
                     <div class="first-thumb active">
                       <div class="thumb">
-                        <span class="icon"><img src="assets/images/search-icon-01.png" alt=""><h4>Hotels</h4></span>    
+                        <span class="icon"><img src="{{ url_for('static',filename='assets/images/search-icon-01.png') }}" alt=""><h4>Hotels</h4></span>    
                       </div>
                     </div>
                     <div>
                       <div class="thumb">                 
-                        <span class="icon"><img src="assets/images/search-icon-02.png" alt=""><h4>Restaurants</h4></span>
+                        <span class="icon"><img src="{{ url_for('static',filename='assets/images/search-icon-02.png') }}" alt=""><h4>Restaurants</h4></span>
                       </div>
                     </div>
                     <!-- <div>
@@ -121,7 +126,7 @@ https://templatemo.com/tm-564-plot-listing
                     </div> -->
                     <div class="last-thumb">
                       <div class="thumb">                 
-                        <span class="icon"><img src="assets/images/search-icon-05.png" alt=""><h4>Attractions</h4></span>
+                        <span class="icon"><img src="{{ url_for('static',filename='assets/images/search-icon-05.png') }}" alt=""><h4>Attractions</h4></span>
                       </div>
                     </div>
                   </div>
@@ -137,7 +142,7 @@ https://templatemo.com/tm-564-plot-listing
                                 <div class="row">
                                   <div class="col-lg-6">
                                     <div class="top-icon">
-                                      <span class="icon"><img src="assets/images/search-icon-01.png" alt=""><h4>Hotels</h4></span> 
+                                      <span class="icon"><img src="{{ url_for('static',filename='assets/images/search-icon-01.png') }}" alt=""><h4>Hotels</h4></span> 
                                     </div>
                                   </div>
                                   <div class="col-lg-6">
@@ -157,7 +162,7 @@ https://templatemo.com/tm-564-plot-listing
                                   </div>
                                   <div class="col-lg-3">
                                     <div class="text-icon">
-                                      <h4><img src="assets/images/listing-icon-heading.png" alt=""> Total Listings</h4>
+                                      <h4><img src="{{ url_for('static',filename='assets/images/listing-icon-heading.png') }}" alt=""> Total Listings</h4>
                                     </div>
                                     <span class="list-item">This Week: 200 Listings &amp; 150 Sales<br>This Month: 1,800 Listings &amp; 1,560 Sales<br>This Year: 16,000 Listings &amp; 14,000 Sales</span>
                                   </div>
@@ -190,7 +195,7 @@ https://templatemo.com/tm-564-plot-listing
                                 <div class="row">
                                   <div class="col-lg-6">
                                     <div class="top-icon">
-                                      <span class="icon"><img src="assets/images/search-icon-02.png" alt=""><h4>Restaurants</h4></span> 
+                                      <span class="icon"><img src="{{ url_for('static',filename='assets/images/search-icon-02.png') }}" alt=""><h4>Restaurants</h4></span> 
                                     </div>
                                   </div>
                                   <div class="col-lg-6">
@@ -213,7 +218,7 @@ https://templatemo.com/tm-564-plot-listing
                                   </div>
                                   <div class="col-lg-3">
                                     <div class="text-icon">
-                                      <h4><img src="assets/images/listing-icon-heading.png" alt=""> Total Listings</h4>
+                                      <h4><img src="{{ url_for('static',filename='assets/images/listing-icon-heading.png') }}" alt=""> Total Listings</h4>
                                     </div>
                                     <span class="list-item">This Week: 124 Listings &amp; 84 Sales<br>This Month: 1,040 Listings &amp; 720 Sales<br>This Year: 10,640 Listings &amp; 9,600 Sales</span>
                                   </div>
@@ -246,7 +251,7 @@ https://templatemo.com/tm-564-plot-listing
                                 <div class="row">
                                   <div class="col-lg-6">
                                     <div class="top-icon">
-                                      <span class="icon"><img src="assets/images/search-icon-05.png" alt=""><h4>Attractions</h4></span> 
+                                      <span class="icon"><img src="{{ url_for('static',filename='assets/images/search-icon-05.png') }}" alt=""><h4>Attractions</h4></span> 
                                     </div>
                                   </div>
                                   <div class="col-lg-6">
@@ -266,7 +271,7 @@ https://templatemo.com/tm-564-plot-listing
                                   </div>
                                   <div class="col-lg-3">
                                     <div class="text-icon">
-                                      <h4><img src="assets/images/listing-icon-heading.png" alt=""> Total Listings</h4>
+                                      <h4><img src="{{ url_for('static',filename='assets/images/listing-icon-heading.png') }}" alt=""> Total Listings</h4>
                                     </div>
                                     <span class="list-item">This Week: 800 Listings &amp; 400 Sales<br>This Month: 1,600 Listings &amp; 1,200 Sales<br>This Year: 14,000 Listings &amp; 12,000 Sales</span>
                                   </div>
@@ -299,7 +304,7 @@ https://templatemo.com/tm-564-plot-listing
                                 <div class="row">
                                   <div class="col-lg-6">
                                     <div class="top-icon">
-                                      <span class="icon"><img src="assets/images/search-icon-04.png" alt=""><h4>Shopping</h4></span> 
+                                      <span class="icon"><img src="{{ url_for('static',filename='assets/images/search-icon-04.png') }}" alt=""><h4>Shopping</h4></span> 
                                     </div>
                                   </div>
                                   <div class="col-lg-6">
@@ -319,7 +324,7 @@ https://templatemo.com/tm-564-plot-listing
                                   </div>
                                   <div class="col-lg-3">
                                     <div class="text-icon">
-                                      <h4><img src="assets/images/listing-icon-heading.png" alt=""> Total Listings</h4>
+                                      <h4><img src="{{ url_for('static',filename='assets/images/listing-icon-heading.png') }}" alt=""> Total Listings</h4>
                                     </div>
                                     <span class="list-item">This Week: 150 Listings &amp; 140 Sales<br>This Month: 1,500 Listings &amp; 1,100 Sales<br>This Year: 15,000 Listings &amp; 14,000 Sales</span>
                                   </div>
@@ -352,7 +357,7 @@ https://templatemo.com/tm-564-plot-listing
                                 <div class="row">
                                   <div class="col-lg-6">
                                     <div class="top-icon">
-                                      <span class="icon"><img src="assets/images/search-icon-05.png" alt=""><h4>Traveling</h4></span> 
+                                      <span class="icon"><img src="{{ url_for('static',filename='assets/images/search-icon-05.png') }}" alt=""><h4>Traveling</h4></span> 
                                     </div>
                                   </div>
                                   <div class="col-lg-6">
@@ -372,7 +377,7 @@ https://templatemo.com/tm-564-plot-listing
                                   </div>
                                   <div class="col-lg-3">
                                     <div class="text-icon">
-                                      <h4><img src="assets/images/listing-icon-heading.png" alt=""> Total Listings</h4>
+                                      <h4><img src="{{ url_for('static',filename='assets/images/listing-icon-heading.png') }}" alt=""> Total Listings</h4>
                                     </div>
                                     <span class="list-item">This Week: 200 Listings &amp; 120 Sales<br>This Month: 1,400 Listings &amp; 900 Sales<br>This Year: 14,000 Listings &amp; 12,000 Sales</span>
                                   </div>
@@ -467,12 +472,12 @@ https://templatemo.com/tm-564-plot-listing
 
 
   <!-- Scripts -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/animation.js"></script>
-  <script src="assets/js/imagesloaded.js"></script>
-  <script src="assets/js/custom.js"></script>
+  <script src="{{ url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static',filename='assets/js/owl-carousel.js') }}"></script>
+  <script src="{{ url_for('static',filename='assets/js/animation.js') }}"></script>
+  <script src="{{ url_for('static',filename='assets/js/imagesloaded.js') }}"></script>
+  <script src="{{ url_for('static',filename='assets/js/custom.js') }}"></script>
 
 </body>
 
