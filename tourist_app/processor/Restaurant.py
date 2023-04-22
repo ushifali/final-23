@@ -28,6 +28,14 @@ def find_restaurants(latitude, longitude, user_id):
 
     all_restaurants = Restaurant.query.all()
     recommendations = get_recommendations(all_restaurants, latitude, longitude)
+    contract_restaurants = map_to_contract_restaurant(recommendations)
+
+    final_recommended_restaurants = recommend_restaurants(contract_user_preferences[user_id], contract_restaurants)
+
+    return final_recommended_restaurants[:10]
+
+
+def map_to_contract_restaurant(recommendations):
     contractRestaurants = []
     for recommendation in recommendations:
         cuisines = recommendation[0].cuisines.split(",")
@@ -43,10 +51,7 @@ def find_restaurants(latitude, longitude, user_id):
                                                       longitude=recommendation[0].longitude,
                                                       timings=recommendation[0].timings,
                                                       distance=recommendation[1]))
-
-    final_recommended_restaurants = recommend_restaurants(contract_user_preferences[user_id], contractRestaurants)
-
-    return final_recommended_restaurants
+    return contractRestaurants
 
 
 def haversine_distance(lat1, lon1, lat2, lon2):
@@ -83,7 +88,7 @@ def get_recommendations(restaurants, user_latitude, user_longitude, max_distance
 
 def cosine_similarity(cuisine_list1, cuisine_list2):
     common_cuisines = set(cuisine_list1).intersection(set(cuisine_list2))
-    print(common_cuisines)
+    # print(common_cuisines)
     magnitude1 = len(cuisine_list1)
     magnitude2 = len(cuisine_list2)
     if magnitude1 == 0 or magnitude2 == 0:
@@ -96,10 +101,6 @@ def cosine_similarity(cuisine_list1, cuisine_list2):
 def recommend_restaurants(user_preferences, restaurant_list):
     recommended_restaurants = []
     for restaurant in restaurant_list:
-        # print("Restaurant Name")
-        # print(restaurant.restaurant_name)
-        # print(user_preferences.cuisines)
-        # print(restaurant.cuisines)
         cosine_sim = cosine_similarity(user_preferences.cuisines, restaurant.cuisines)
         if cosine_sim > 0:
             recommended_restaurants.append(restaurant)
