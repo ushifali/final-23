@@ -54,6 +54,8 @@ def load_restaurant_data():
             db.session.commit()
 
 def prepare_listing_hotel(row):
+    if row["hotel_star_rating"] == "":
+        row["hotel_star_rating"] = 4.0
     row["longitude"] = float(row["longitude"])
     row["latitude"] = float(row["latitude"])
     row["hotel_star_rating"] = float(row["hotel_star_rating"])
@@ -70,6 +72,8 @@ def load_hotel_data():
             db.session.commit()
 
 def prepare_listing_attraction(row):
+    if row["totalScore"] == "":
+        row["totalScore"] = 3.7
     row["longitude"] = float(row["longitude"])
     row["latitude"] = float(row["latitude"])
     row["totalScore"] = float(row["totalScore"])
