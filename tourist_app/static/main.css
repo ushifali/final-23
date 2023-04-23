@@ -9,6 +9,17 @@ body {
     color: #444444;
   }
 
+  .login-button {
+    color: white; 
+    font-weight: bold; 
+    text-decoration: underline !important; 
+    font-size: larger;
+  }
+
+  .login-button :hover {
+    color: rgb(116, 116, 163);
+  }
+
   .main-banner {
     background-repeat: no-repeat;
     background-position: center center;

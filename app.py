@@ -52,6 +52,25 @@ def load_restaurant_data():
             db.session.add_all(listings)
             db.session.commit()
 
+def load_hotel_data():
+    with open('final_hotel_dataset.csv', encoding="utf-8", newline='') as csv_file:
+        csvreader = csv.DictReader(csv_file, quotechar='"')
+
+        listings = [prepare_listing(row) for row in csvreader]
+
+        with app.app_context():
+            db.session.add_all(listings)
+            db.session.commit()
+
+def load_attractions_data():
+    with open('attractions_data.csv', encoding="utf-8", newline='') as csv_file:
+        csvreader = csv.DictReader(csv_file, quotechar='"')
+
+        listings = [prepare_listing(row) for row in csvreader]
+
+        with app.app_context():
+            db.session.add_all(listings)
+            db.session.commit()
 
 def create_db_tables():
     with app.app_context():
@@ -74,6 +93,8 @@ def main():
     elif arg == "setup":
         create_db_tables()
         load_restaurant_data()
+        load_hotel_data()
+        load_attractions_data()
         load_user_preference_data()
     elif arg == "drop-all":
         drop_all_tables()

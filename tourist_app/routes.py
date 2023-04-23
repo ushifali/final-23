@@ -8,9 +8,11 @@ from tourist_app.domain.attraction import Attraction
 from tourist_app.domain.hotel import Hotel
 from tourist_app.forms import LoginForm, RegistrationForm
 from tourist_app.processor.Restaurant import find_restaurants
+from tourist_app.processor.Hotel import find_hotels
+from tourist_app.processor.Attraction import find_attractions
 
 
-@app.route('/')
+# @app.route('/')
 # ‘/’ URL is bound with hello_world() function.
 def hello_world():
     return 'Hello World'
@@ -34,9 +36,8 @@ def index():
                            prc=[{'prc': '100-500'}, {'prc': '500-1000'}, {'prc': '1000-3000'}, {'prc': '3000-more'}],
                            )
 
-
+@app.route('/')
 @app.route("/category")
-@login_required
 def category():
     restaurants = db.session.execute(db.select(Restaurant).filter_by(dining_rating=4.9))
     hotels = db.session.execute(db.select(Hotel).filter_by(city='Bangalore', rating=5.0))
@@ -60,20 +61,32 @@ def get_location():
 def listing():
     if request.method == "POST":
         category = request.form.get('category')
-        address = request.form.get('address')
+        distance = request.form.get('distance')
         price = request.form.get('price')
-        user_id = session.get('user_id')
-
-        latitude = session.get('latitude')
-        longitude = session.get('longitude')
+        
+        user_id = 7
+        latitude = 12.9716034  
+        longitude = 77.5946976
+        # user_id = session['user_id']
+        # latitude = session.get('latitude')
+        # longitude = session.get('longitude')
 
         print(latitude, longitude, user_id)
 
         form_data = [
-            category, address, price
+            category, distance, price
         ]
-        restaurants = find_restaurants(latitude, longitude, user_id)
-        return render_template('listing.html', data=form_data, restaurants=restaurants)
+        
+        if category == 'Restaurants':
+            restaurants = find_restaurants(latitude, longitude, user_id, distance, price)
+            return render_template('listing.html', data=form_data, restaurants=restaurants)
+        elif category == 'Hotels':
+            hotels = find_hotels(latitude, longitude, user_id, distance, price)
+            return render_template('listing.html', data=form_data, hotels=hotels)
+        elif category == 'Attractions':
+            attractions = find_attractions(latitude, longitude, user_id, distance, price)
+            return render_template('listing.html', data=form_data, attractions=attractions)
+
     return render_template('listing.html')
 
 

@@ -8,7 +8,7 @@ from tourist_app.domain.user import User
 from tourist_app.domain.user_preferences import UserPreferences
 
 
-def find_restaurants(latitude, longitude, user_id):
+def find_restaurants(latitude, longitude, user_id, distance, price):
     user_preferences = UserPreferences.query.all()
 
     contract_user_preferences = []
@@ -26,8 +26,10 @@ def find_restaurants(latitude, longitude, user_id):
                                                                  facilities=facilities
                                                                  ))
 
+    distance = int(distance)
+    price = int(price)
     all_restaurants = Restaurant.query.all()
-    recommendations = get_recommendations(all_restaurants, latitude, longitude)
+    recommendations = get_recommendations(all_restaurants, latitude, longitude, distance, price)
     contract_restaurants = map_to_contract_restaurant(recommendations)
 
     final_recommended_restaurants = recommend_restaurants(contract_user_preferences[user_id], contract_restaurants)
