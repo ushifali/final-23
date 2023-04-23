@@ -29,7 +29,6 @@ def restaurants_list(latitude, longitude, user_id):
 @app.route("/index", methods=['GET', 'POST'])
 @login_required
 def index():
-
     return render_template('index.html',
                            cat=[{'cat': 'Attractions'}, {'cat': 'Restaurants'}, {'cat': 'Hotels'}],
                            prc=[{'prc': '100-500'}, {'prc': '500-1000'}, {'prc': '1000-3000'}, {'prc': '3000-more'}],
@@ -39,12 +38,12 @@ def index():
 @app.route("/category")
 @login_required
 def category():
-
     restaurants = db.session.execute(db.select(Restaurant).filter_by(dining_rating=4.9))
     hotels = db.session.execute(db.select(Hotel).filter_by(city='Bangalore', rating=5.0))
     attractions = db.session.execute(db.select(Attraction).filter_by(city='Bengaluru', totalScore=5.0))
 
     return render_template('category.html', restaurants=restaurants, hotels=hotels, attractions=attractions)
+
 
 @app.route('/get_location', methods=['POST'])
 def get_location():
@@ -55,6 +54,7 @@ def get_location():
     session['longitude'] = longitude
     return jsonify(success=True)
 
+
 @app.route("/listing", methods=['GET', 'POST'])
 @login_required
 def listing():
@@ -62,21 +62,19 @@ def listing():
         category = request.form.get('category')
         address = request.form.get('address')
         price = request.form.get('price')
-        
+        user_id = session.get('user_id')
+
         latitude = session.get('latitude')
         longitude = session.get('longitude')
 
-        print(latitude, longitude)
-        
+        print(latitude, longitude, user_id)
+
         form_data = [
             category, address, price
         ]
-
-        restaurants = db.session.execute(db.select(Restaurant).filter_by(pricing_for_2=8000))
-
-        return render_template('listing.html', data = form_data, restaurants = restaurants)
+        restaurants = find_restaurants(latitude, longitude, user_id)
+        return render_template('listing.html', data=form_data, restaurants=restaurants)
     return render_template('listing.html')
-
 
 
 @app.route("/contact")
@@ -106,6 +104,7 @@ def register():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
+        session['user_id'] = current_user.id
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
@@ -113,6 +112,7 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
+            session['user_id'] = user.id
             return redirect(next_page) if next_page else redirect(url_for('index'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')

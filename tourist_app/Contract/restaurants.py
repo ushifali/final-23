@@ -22,7 +22,9 @@ class ContractRestaurant():
             "restaurant_name": self.restaurant_name,
             "dining_rating": self.dining_rating,
             "pricing_for_2": self.pricing_for_2,
-            "distance": self.distance
+            "distance": self.distance,
+            "timings": self.timings,
+            "address": self.address
         }
 
 def map_to_contract_restaurant(restaurant: Restaurant, distance):
