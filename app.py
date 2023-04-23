@@ -41,7 +41,6 @@ def prepare_listing(row):
     restaurant = Restaurant(**row)
     return restaurant
 
-
 def load_restaurant_data():
     with open('fullRestaurants.csv', encoding="utf-8", newline='') as csv_file:
         csvreader = csv.DictReader(csv_file, quotechar='"')
@@ -52,21 +51,33 @@ def load_restaurant_data():
             db.session.add_all(listings)
             db.session.commit()
 
+def prepare_listing_hotel(row):
+    row["longitude"] = float(row["longitude"])
+    row["latitude"] = float(row["latitude"])
+    row["hotel_star_rating"] = float(row["hotel_star_rating"])
+    return Hotel(**row)
+
 def load_hotel_data():
     with open('final_hotel_dataset.csv', encoding="utf-8", newline='') as csv_file:
         csvreader = csv.DictReader(csv_file, quotechar='"')
 
-        listings = [prepare_listing(row) for row in csvreader]
+        listings = [prepare_listing_hotel(row) for row in csvreader]
 
         with app.app_context():
             db.session.add_all(listings)
             db.session.commit()
 
+def prepare_listing_attraction(row):
+    row["longitude"] = float(row["longitude"])
+    row["latitude"] = float(row["latitude"])
+    row["totalScore"] = float(row["totalScore"])
+    return Attraction(**row)
+
 def load_attractions_data():
     with open('attractions_data.csv', encoding="utf-8", newline='') as csv_file:
         csvreader = csv.DictReader(csv_file, quotechar='"')
 
-        listings = [prepare_listing(row) for row in csvreader]
+        listings = [prepare_listing_attraction(row) for row in csvreader]
 
         with app.app_context():
             db.session.add_all(listings)
