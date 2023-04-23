@@ -3,6 +3,8 @@ import sys
 
 from tourist_app import app, db
 from tourist_app.domain.restaurant import Restaurant
+from tourist_app.domain.hotel import Hotel
+from tourist_app.domain.attraction import Attraction
 from tourist_app.domain.user_preferences import UserPreferences
 
 
