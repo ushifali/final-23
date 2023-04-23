@@ -81,7 +81,10 @@ def listing():
 
 @app.route("/contact")
 def contact():
-    return render_template('contact.html')
+    latitude = session.get('latitude')
+    longitude = session.get('longitude')
+
+    return render_template('contact.html', latitude = latitude, longitude = longitude)
 
 
 @app.route("/register", methods=['GET', 'POST'])

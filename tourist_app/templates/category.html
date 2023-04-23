@@ -146,12 +146,13 @@ https://templatemo.com/tm-564-plot-listing
                                       </div> 
                                     </div> -->
                                     <div class="right-content align-self-center">
-                                      <a href="#"><h4> {{ item.restaurant_name }} </h4></a>
+                                      <a href="{{ item.website }}"><h4> {{ item.restaurant_name }} </h4></a>
                                       <!-- <h6>by: Real ESTATE Agent</h6> -->
                                       <span class="info">Rating: {{ item.dining_rating }}</span><br>
                                       <span class="info">Timings: {{ item.timings }} </span>
                                       <span class="price"><div class="icon"><img src="{{ url_for('static',filename='assets/images/listing-icon-01.png') }}" alt=""></div> Price: {{ item.pricing_for_2 }}</span>
                                       <span class="details">Location: <em>{{ item.address }}</em></span>
+                                      <span class="details"> <a href="{{ item.website }}">Click here to go to website</a> </span>
                                     </div>
                                   </div>
                                 </div>
@@ -176,10 +177,11 @@ https://templatemo.com/tm-564-plot-listing
                                 <div class="col-lg-12">
                                   <div class="listing-item">
                                     <div class="right-content align-self-center">
-                                      <a href="#"><h4> {{ item.property_name }} </h4></a>
+                                      <a href=" {{ item.pageurl }} "><h4> {{ item.property_name }} </h4></a>
                                       <span class="info">Rating: {{ item.rating }} </span>
                                       <span class="price"><div class="icon"><img src="{{ url_for('static',filename='assets/images/listing-icon-01.png') }}" alt=""></div> Room Type: {{ item.room_type }} </span>
                                       <span class="details">Location: <em> {{ item.address }} </em></span>
+                                      <span class="details"><a href="{{ item.pageurl }}"> Click here to go to website</a> </em></span>
                                     </div>
                                   </div>
                                 </div>

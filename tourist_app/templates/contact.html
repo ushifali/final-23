@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <title>Plotlist - Listing HTML5 Template</title>
+    <title>Contact Us</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/templatemo-plot-listing.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/animated.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/owl.css') }}">
+
 <!--
 
 TemplateMo 564 Plot Listing
@@ -29,6 +30,7 @@ TemplateMo 564 Plot Listing
 https://templatemo.com/tm-564-plot-listing
 
 -->
+
   </head>
 
 <body>
@@ -67,7 +69,6 @@ https://templatemo.com/tm-564-plot-listing
             <li> <a href="{{ url_for('login') }}">Login</a> </li>
             <li> <a href="{{ url_for('register') }}">Register</a> </li>
               {% endif %}
-              <!-- <li><div class="main-white-button"><a href="#"><i class="fa fa-plus"></i> Add Your Listing</a></div></li>  -->
             </ul>          
             <a class='menu-trigger'>
                 <span>Menu</span>
@@ -101,7 +102,10 @@ https://templatemo.com/tm-564-plot-listing
             <div class="row">
               <div class="col-lg-6">
                 <div id="map">
-                  <iframe src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="650px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                  <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3884.6729703344217!2d74.93180031384588!3d13.18300781377329!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbb56415ad85e5b%3A0x10b77ac6f6afc7fa!2sN.M.A.M.%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1635912111263!5m2!1sen!2sin"
+            width="800" height="600" style="border: 10px solid whitesmoke;" allowfullscreen="" loading="lazy"></iframe>
+                  <!-- <iframe src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="650px" frameborder="0" style="border:0" allowfullscreen></iframe> -->
                 </div>
               </div>
               <div class="col-lg-6 align-self-center">
@@ -210,7 +214,7 @@ https://templatemo.com/tm-564-plot-listing
     </div>
   </footer>
 
-
+  
   <!-- Scripts -->
   <script src="{{ url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
