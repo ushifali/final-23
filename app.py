@@ -138,6 +138,12 @@ def main():
         load_hotel_data()
     elif arg == "drop-all":
         drop_all_tables()
+    elif arg == "create-db":
+        create_db_tables()
+    elif arg == "load-hotel-data":
+        load_hotel_data()
+    elif arg == "load-attractions-data":
+        load_attractions_data()
     else:
         print("unknown command")
 

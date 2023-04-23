@@ -9,6 +9,7 @@ from tourist_app.domain.user_preferences import UserPreferences
 
 import numpy as np
 
+
 def find_attractions(latitude, longitude, user_id, distance, price, rating):
     user_preferences = UserPreferences.query.all()
 
@@ -44,17 +45,17 @@ def map_to_contract_attraction(recommendations):
     contractAttractions = []
     for recommendation in recommendations:
         recommendation[0].categories = recommendation[0].categories.split(",")
-        contractAttractions.append(ContractAttraction(id=recommendation[0].id, 
-                                                    title=recommendation[0].title, 
-                                                    address=recommendation[0].address, 
-                                                    city=recommendation[0].city, 
-                                                    description=recommendation[0].description, 
-                                                    street=recommendation[0].street, 
-                                                    totalScore=recommendation[0].totalScore, 
-                                                    categories=recommendation[0].categories, 
-                                                    latitude=recommendation[0].latitude, 
-                                                    longitude=recommendation[0].longitude, 
-                                                    distance=recommendation[1]))
+        contractAttractions.append(ContractAttraction(id=recommendation[0].id,
+                                                      title=recommendation[0].title,
+                                                      address=recommendation[0].address,
+                                                      city=recommendation[0].city,
+                                                      description=recommendation[0].description,
+                                                      street=recommendation[0].street,
+                                                      totalScore=recommendation[0].totalScore,
+                                                      categories=recommendation[0].categories,
+                                                      latitude=recommendation[0].latitude,
+                                                      longitude=recommendation[0].longitude,
+                                                      distance=recommendation[1]))
     return contractAttractions
 
 
@@ -93,21 +94,19 @@ def get_recommendations(attractions, user_latitude, user_longitude, max_distance
 
 def cosine_similarity(cuisine_list1, cuisine_list2):
     common_cuisines = set(cuisine_list1).intersection(set(cuisine_list2))
-    # print(common_cuisines)
     magnitude1 = len(cuisine_list1)
     magnitude2 = len(cuisine_list2)
     if magnitude1 == 0 or magnitude2 == 0:
         return 0
     else:
         return len(common_cuisines) / (magnitude1 * magnitude2) ** 0.5
-    
 
 
 # define a function to recommend restaurants based on user preferences and restaurant cuisines
 def recommend_attractions(user_preferences, attraction_list):
     recommended_attractions = []
-    for restaurant in attraction_list:
-        cosine_sim = cosine_similarity(user_preferences.categories, restaurant.categories)
+    for attraction in attraction_list:
+        cosine_sim = cosine_similarity(user_preferences.categories, attraction.categories)
         if cosine_sim > 0:
-            recommended_attractions.append(restaurant)
+            recommended_attractions.append(attraction)
     return recommended_attractions
