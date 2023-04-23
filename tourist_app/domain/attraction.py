@@ -7,7 +7,7 @@ class Attraction(db.Model):
     description = db.Column(db.String(500))
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
-    price = db.Column(db.Float)
+    price = db.Column(db.String(10))
     state = db.Column(db.String(50))
     street = db.Column(db.String(50))
     title = db.Column(db.String(50))

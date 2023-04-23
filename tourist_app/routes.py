@@ -65,12 +65,12 @@ def listing():
         price = request.form.get('price')
         rating = request.form.get('rating')
 
-        user_id = 7
-        latitude = 12.9716034  
-        longitude = 77.5946976
-        # user_id = session['user_id']
-        # latitude = session.get('latitude')
-        # longitude = session.get('longitude')
+        # user_id = 7
+        # latitude = 12.9716034  
+        # longitude = 77.5946976
+        user_id = session['user_id']
+        latitude = session.get('latitude')
+        longitude = session.get('longitude')
 
         print(latitude, longitude, user_id)
 
