@@ -9,7 +9,7 @@ from tourist_app.domain.user_preferences import UserPreferences
 
 import numpy as np
 
-def find_attractions(latitude, longitude, user_id, distance, price):
+def find_attractions(latitude, longitude, user_id, distance, price, rating):
     user_preferences = UserPreferences.query.all()
 
     contract_user_preferences = []
@@ -27,10 +27,12 @@ def find_attractions(latitude, longitude, user_id, distance, price):
                                                                  facilities=facilities
                                                                  ))
 
-    distance = int(distance)
-    price = int(price)
+    distance = float(distance)
+    price = float(price)
+    rating = float(rating)
+
     all_attractions = Attraction.query.all()
-    recommendations = get_recommendations(all_attractions, latitude, longitude, distance, price)
+    recommendations = get_recommendations(all_attractions, latitude, longitude, distance, price, rating)
     contract_attractions = map_to_contract_attraction(recommendations)
 
     final_recommended_attractions = recommend_attractions(contract_user_preferences[user_id], contract_attractions)

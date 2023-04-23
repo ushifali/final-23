@@ -128,10 +128,17 @@ https://templatemo.com/tm-564-plot-listing
                       </select> -->
                   </fieldset>
               </div>
-              <div class="col-lg-3">                        
-                  <fieldset>
-                      <button class="main-button" type="submit"><i class="fa fa-search"></i> Search Now</button>
-                  </fieldset>
+              <div class="col-lg-3 align-self-center">
+                <fieldset>
+                  <input type="text" name="rating" value="{{ request.form['rating'] }}" class="searchText" placeholder="Enter minimum rating" autocomplete="on" required>
+                </fieldset>
+              </div>
+              <div class="col-lg-12 center">                        
+                <!-- <fieldset> -->
+                <!-- </fieldset> -->
+                <div>
+                  <button class="main-button" type="submit"><i class="fa fa-search"></i> Search Now</button>
+                </div>
               </div>
             </div>
           </form>

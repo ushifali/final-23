@@ -63,7 +63,8 @@ def listing():
         category = request.form.get('category')
         distance = request.form.get('distance')
         price = request.form.get('price')
-        
+        rating = request.form.get('rating')
+
         user_id = 7
         latitude = 12.9716034  
         longitude = 77.5946976
@@ -74,17 +75,17 @@ def listing():
         print(latitude, longitude, user_id)
 
         form_data = [
-            category, distance, price
+            category, distance, price, rating
         ]
         
         if category == 'Restaurants':
-            restaurants = find_restaurants(latitude, longitude, user_id, distance, price)
+            restaurants = find_restaurants(latitude, longitude, user_id, distance, price, rating)
             return render_template('listing.html', data=form_data, restaurants=restaurants)
         elif category == 'Hotels':
-            hotels = find_hotels(latitude, longitude, user_id, distance, price)
+            hotels = find_hotels(latitude, longitude, user_id, distance, price, rating)
             return render_template('listing.html', data=form_data, hotels=hotels)
         elif category == 'Attractions':
-            attractions = find_attractions(latitude, longitude, user_id, distance, price)
+            attractions = find_attractions(latitude, longitude, user_id, distance, price, rating)
             return render_template('listing.html', data=form_data, attractions=attractions)
 
     return render_template('listing.html')
