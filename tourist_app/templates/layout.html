@@ -16,7 +16,15 @@
         <title>TOURGUIDE</title>
     {% endif %}
 </head>
-<body style="background-image: url('../static/assets/images/banner-bg.jpg')">
+
+{% if title == 'Login' %}
+
+<body style="background-image: url('../static/assets/images/login.jpg'); background-size: cover;">
+  {% else %}
+
+  <body style="background-image: url('../static/assets/images/banner-bg.jpg')">
+    {% endif %}
+
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
